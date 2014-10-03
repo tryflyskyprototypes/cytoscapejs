@@ -1,0 +1,2 @@
+serviceClass: jp.levelfive.samples.cytoscape.client.GreetingService
+path: F135C96D4D32B9E14721D8E3CBAEC03F.gwt.rpc
