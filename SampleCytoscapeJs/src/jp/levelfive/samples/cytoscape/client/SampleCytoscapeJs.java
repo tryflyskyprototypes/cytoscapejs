@@ -131,13 +131,11 @@ public class SampleCytoscapeJs implements EntryPoint {
 	              public void onResponseReceived(Request request,
 	                      Response response) {
 	                  if (200 == response.getStatusCode()) {
-//	                      updateTable(asArrayOfStockData(response.getText()));
 
-	                	  String json = response.getText();
-	                	  asArrayOfPathwayData(json);
+	                	  String json = response.getText();		//JSON取得
+	                	  refreshPathwayView(json);
 
-//	                	  Elements elements = JsonUtils.safeEval(response.getText());
-//	                	  updateTable(asArrayOfPathwayData(elements));
+//	                	  refreshPathwayView(asArrayOfPathwayData(elements));
 	                  } else {
 	                      displayError("Couldn't retrieve JSON ("
 	                              + response.getStatusText() + ")");
@@ -151,8 +149,13 @@ public class SampleCytoscapeJs implements EntryPoint {
 	      }
 	 }
 
-	 //	 private final native Elements asArrayOfPathwayData(Elements json) /*-{
-	 private final native JsArray<Elements> asArrayOfPathwayData(String json) /*-{
+
+	 /**
+	  * JSONを受け取り、pathwayを描写する・・・はずだが、現在ここではまってます
+	  * @param json
+	  */
+	 //	 private final native void refreshPathwayView(Elements json) /*-{
+	 private final native void refreshPathwayView(String json) /*-{
 
 			var javaele = {
 			    nodes: [

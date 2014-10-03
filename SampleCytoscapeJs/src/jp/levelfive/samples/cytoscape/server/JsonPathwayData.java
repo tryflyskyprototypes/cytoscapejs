@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Get送信されたパラメータからjson生成
  *
+ *
  * @author admin
  *
  */
+//TODO Web画面のボタンごとに違うJSONを生成させる
 public class JsonPathwayData extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
