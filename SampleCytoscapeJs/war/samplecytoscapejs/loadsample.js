@@ -24,6 +24,8 @@ function testload(elements) {
 //	alert("testload()");
 //	alert(elements);
 	var cy = $("#cy").cytoscape("get");
-//	cy.load(elements);
-	cy.load(JSON.parse(elements));
+
+//	cy.load(elements);				//↑のjsonは直接渡しても描写される
+
+	cy.load(JSON.parse(elements));	//GWTから来たjson（文字列）はパースが必要
 };

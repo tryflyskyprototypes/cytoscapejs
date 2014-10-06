@@ -97,14 +97,9 @@ public class JsonPathwayData extends HttpServlet {
     		break;
     	}
 
-
-
 //    	out.println("  };");
     	out.println("  }");
     	out.flush();
-
-
-
     }
 
 }
