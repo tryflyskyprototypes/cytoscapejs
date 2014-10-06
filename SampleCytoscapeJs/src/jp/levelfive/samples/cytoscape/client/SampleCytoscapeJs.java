@@ -170,6 +170,11 @@ public class SampleCytoscapeJs implements EntryPoint {
 
 			$wnd.testload(json);
 
+		//	cy.load(elements);				//↑のjsonは直接渡しても描写される
+
+		//	var cy = $wnd.$("#cy").cytoscape("get");
+		//	cy.load(JSON.parse(json));	//GWTから来たjson（文字列）はパースが必要
+
 //	    	return eval(json);
 	  }-*/;
 
