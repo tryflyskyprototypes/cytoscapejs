@@ -76,7 +76,7 @@ public class SampleCytoscapeJs implements EntryPoint {
 
 		btnPanel.add(btn_1);
 		btnPanel.add(btn_2);
-//		btnPanel.add(btn_3);
+		btnPanel.add(btn_3);
 
 
 		mainPanel.add(btnPanel);
