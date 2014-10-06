@@ -64,16 +64,19 @@ public class SampleCytoscapeJs implements EntryPoint {
 	private Label label_json = new Label();
 	private Label label_errMsg = new Label();
 
-	private final String SYMBOL_1 = "ONE";
-	private final String SYMBOL_2 = "TWO";
-	private final String SYMBOL_3 = "THREE";
+	public static final String SYMBOL_1 = "ONE";
+	public static final String SYMBOL_2 = "TWO";
+	public static final String SYMBOL_3 = "THREE";
+
+	private final String URL_GET_PARAM = "pathway?q=";
+	private final String JSON_URL = GWT.getModuleBaseURL() + URL_GET_PARAM;	//TODO URL修正
 
 	@Override
 	public void onModuleLoad() {
 
 		btnPanel.add(btn_1);
 		btnPanel.add(btn_2);
-		btnPanel.add(btn_3);
+//		btnPanel.add(btn_3);
 
 
 		mainPanel.add(btnPanel);
@@ -112,8 +115,13 @@ public class SampleCytoscapeJs implements EntryPoint {
 
 
 
-	private static final String JSON_URL = GWT.getModuleBaseURL() + "pathway?q=";	//TODO URL修正
 
+	/**
+	 * ボタン(btn_X)をクリックすると呼ばれる
+	 * 各ボタンから渡される値を元にJSON取得
+	 *
+	 * @param symbol
+	 */
 	 private void doGet(String symbol) {
 
 	      String url = JSON_URL + "+" + symbol;
@@ -135,14 +143,11 @@ public class SampleCytoscapeJs implements EntryPoint {
 	                	  String json = response.getText();		//JSON取得
 	                	  refreshPathwayView(json);
 
-//	                	  refreshPathwayView(asArrayOfPathwayData(elements));
 	                  } else {
 	                      displayError("Couldn't retrieve JSON ("
 	                              + response.getStatusText() + ")");
 	                  }
 	              }
-
-
 	          });
 	      } catch (RequestException e) {
 	          displayError("Couldn't retrieve JSON : " + e.toString());
@@ -150,116 +155,24 @@ public class SampleCytoscapeJs implements EntryPoint {
 	 }
 
 
+
+
+
+
+
 	 /**
-	  * JSONを受け取り、pathwayを描写する・・・はずだが、現在ここではまってます
+	  * JSONを受け取り、pathwayを描写する
+	  * .jsに記述したfunctionにjsonの文字列を渡す
+	  *
 	  * @param json
 	  */
-	 //	 private final native void refreshPathwayView(Elements json) /*-{
 	 private final native void refreshPathwayView(String json) /*-{
 
-			var javaele = {
-			    nodes: [
-			      { data: { id: 'j', name: 'java1' } },
-			      { data: { id: 'e', name: 'Elaine' } },
-			      { data: { id: 'k', name: 'Kramer' } },
-			      { data: { id: 'g', name: 'George' } }
-			    ],
-			    edges: [
-			      { data: { source: 'j', target: 'e' } },
-			      { data: { source: 'j', target: 'k' } },
-			      { data: { source: 'j', target: 'g' } },
-			      { data: { source: 'e', target: 'j' } },
-			      { data: { source: 'e', target: 'k' } },
-			      { data: { source: 'k', target: 'j' } },
-			      { data: { source: 'k', target: 'e' } },
-			      { data: { source: 'k', target: 'g' } },
-			      { data: { source: 'g', target: 'j' } }
-			    ]
-			  };
-
-			var javaele2 = json;
-
-
-//			$wnd.alert(json);
-//			$wnd.alert(javaele2);
-
-			var cy = $wnd.$("#cy").cytoscape("get");
-//			$wnd.alert(cy.width());
-			cy.load(json);
-//			cy.load(javaele);
-
-//			$wnd.testload(json);
-//			$wnd.testload(javaele);
-
+			$wnd.testload(json);
 
 //	    	return eval(json);
 	  }-*/;
 
-
-
-
-
-	  /**
-	   * Update the Price and Change fields all the rows in the stock table.
-	   *
-	   * @param pathways Stock data for all rows.
-	   */
-	 /* private void updateTable(StockPrice[] prices) {
-	    for (int i = 0; i < prices.length; i++) {
-	      updateTable(prices[i]);
-	    }
-
-	    // Display timestamp showing last refresh.
-	    lastUpdatedLabel.setText("Last update : "  + DateTimeFormat.getMediumDateTimeFormat().format(new Date()));
-
-	    // ここまで処理がくれば、エラーは発生していない
-	    // エラーメッセージ領域を非表示にする
-	    errorMsgLabel.setVisible(false);
-	  }*/
-//	  private void updateTable(JsArray<Elements> pathways) {
-//	      // テーブルの更新処理
-//	      for (int i = 0; i < pathways.length(); i++) {
-//	          updateTable(pathways.get(i));
-//	      }
-//	  }
-
-
-
-
-
-	  private void updateTable(Elements elements) {
-
-//		  label_json.setText(elements.toString());
-//		  label_json.setText(elements.getNodes().getData().get(0).getName());
-	  }
-
-
-	/**
-	   * Update a single row in the stock table.
-	   *
-	   * @param price Stock data for a single row.
-	   */
-	//  private void updateTable(StockPrice price) {
-//	  private void updateTable(StockData price) {
-//	    // Make sure the stock is still in the stock table.
-//	    if (!stocks.contains(price.getSymbol())) {
-//	      return;
-//	    }
-//
-//	    int row = stocks.indexOf(price.getSymbol()) + 1;
-//
-//	    // Format the data in the Price and Change fields.
-//	    String priceText = NumberFormat.getFormat("#,##0.00").format(
-//	        price.getPrice());
-//	    NumberFormat changeFormat = NumberFormat.getFormat("+#,##0.00;-#,##0.00");
-//	    String changeText = changeFormat.format(price.getChange());
-//	    String changePercentText = changeFormat.format(price.getChangePercent());
-//
-//	    // Populate the Price and Change fields with new data.
-//	    stocksFlexTable.setText(row, 1, priceText);
-//	    stocksFlexTable.setText(row, 2, changeText + " (" + changePercentText
-//	        + "%)");
-//	  }
 
 
 
@@ -269,6 +182,7 @@ public class SampleCytoscapeJs implements EntryPoint {
 	protected void setLavel(String msg) {
 		label_symbol.setText(msg);
 	}
+
 
 
 
