@@ -170,10 +170,9 @@ public class SampleCytoscapeJs implements EntryPoint {
 
 			$wnd.testload(json);
 
-		//	cy.load(elements);				//↑のjsonは直接渡しても描写される
 
-		//	var cy = $wnd.$("#cy").cytoscape("get");
-		//	cy.load(JSON.parse(json));	//GWTから来たjson（文字列）はパースが必要
+//			var cy = $wnd.$("#cy").cytoscape("get");	//ここでcytoscapeを取得して描写するのは上手くいってない
+//			cy.load(JSON.parse(json));
 
 //	    	return eval(json);
 	  }-*/;
@@ -202,3 +201,33 @@ public class SampleCytoscapeJs implements EntryPoint {
 
 
 }
+
+
+
+
+
+
+
+
+/*
+ * memo
+ *
+ * /SampleCytoscapeJs/src/jp/levelfive/samples/cytoscape/SampleCytoscapeJs.gwt.xml
+ *  entry pointとなるクラスを指定
+ *
+ * /SampleCytoscapeJs/src/jp/levelfive/samples/cytoscape/client/SampleCytoscapeJs.java
+ *  EntryPointを継承し、onModuleLoad()に画面レイアウトとイベントを記述
+ *
+ * /SampleCytoscapeJs/war/WEB-INF/web.xml
+ *  Webにアクセスした際に表示するHtmlを指定
+ *    <welcome-file-list>
+ *       <welcome-file>SampleCytoscapeJs.html</welcome-file>
+ *    </welcome-file-list>
+ *
+ * /SampleCytoscapeJs/src/jp/levelfive/samples/cytoscape/server/JsonPathwayData.java
+ *   JSONを文字列で返す
+ *
+ * /SampleCytoscapeJs/war/samplecytoscapejs/loadsample.js
+ *   SampleCytoscapeJs.javaから呼び出され、cytoscape.jsを呼び出す
+ *
+ */
